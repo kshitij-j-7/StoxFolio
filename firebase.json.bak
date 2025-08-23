@@ -1,0 +1,22 @@
+{
+  "firestore": {
+    "database": "(default)",
+    "location": "eur3",
+    "rules": ".firestore/firestore.rules",
+    "indexes": ".firestore/firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist/stoxfolio",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}
