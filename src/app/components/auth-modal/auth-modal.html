@@ -1,0 +1,7 @@
+<app-modal [config]="modalConfig" (onClose)="onClose()">
+    <div class="font-30 text-align-center font-bold margin-top-32 margin-16 modal">Login/Signup</div>
+    <button class="google-sign-in" (click)="authService.loginWithGoogle()">
+        <img src="assets/google-logo.svg" alt="Google logo" />
+        <span>Sign in with Google</span>
+    </button>
+</app-modal>

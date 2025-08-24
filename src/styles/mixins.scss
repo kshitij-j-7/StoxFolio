@@ -1,0 +1,213 @@
+$font-scales: (
+    8: 8px,
+    10: 10px,
+    11: 11px,
+    12: 12px,
+    14: 14px,
+    16: 16px,
+    18: 18px,
+    20: 20px,
+    22: 22px,
+    24: 24px,
+    26: 26px,
+    28: 28px,
+    30: 30px,
+    32: 32px,
+    36: 36px,
+    40: 40px,
+    48: 48px,
+);
+
+@mixin font-utils($deviceSuffix: '') {
+    @each $key, $val in $font-scales {
+        $className: if($deviceSuffix != '', font-#{$key}-#{$deviceSuffix}, font-#{$key});
+
+        .#{$className} {
+            font-size: $val;
+        }
+    }
+}
+
+@mixin line-height-utils($deviceSuffix: '') {
+    @each $key, $val in $font-scales {
+        $className: if($deviceSuffix != '', lh-#{$key}-#{$deviceSuffix}, lh-#{$key});
+
+        .#{$className} {
+            line-height: #{$key}px;
+        }
+    }
+}
+
+$layout-scales: (
+    0: 0,
+    2: 2px,
+    4: 4px,
+    6: 6px,
+    8: 8px,
+    10: 10px,
+    12: 12px,
+    16: 16px,
+    20: 20px,
+    24: 24px,
+    28: 28px,
+    32: 32px,
+    36: 36px,
+    40: 40px,
+    48: 48px,
+    52: 52px,
+    54: 54px,
+    60: 60px,
+    80: 80px,
+    96: 96px,
+    120: 120px,
+    152: 152px,
+    'auto': auto,
+);
+
+@mixin margin-utils($deviceSuffix: '', $suffix: '') {
+    @each $key, $val in $layout-scales {
+        $final-value: if($suffix == 'neg', -$val, $val);
+        $deviceKeySuffix: if($deviceSuffix != '', #{$key}-#{$deviceSuffix}, #{$key});
+        $classNameSuffix: if($suffix != '', -#{$suffix}, '');
+
+        .margin-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin: $final-value;
+        }
+
+        .margin-horizontal-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-left: $final-value;
+            margin-right: $final-value;
+        }
+
+        .margin-vertical-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-top: $final-value;
+            margin-bottom: $final-value;
+        }
+
+        .margin-bottom-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-bottom: $final-value;
+        }
+
+        .margin-top-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-top: $final-value;
+        }
+
+        .margin-left-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-left: $final-value;
+        }
+
+        .margin-right-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-right: $final-value;
+        }
+
+        .margin-inline-#{$deviceKeySuffix}#{$classNameSuffix} {
+            margin-inline: $final-value;
+        }
+    }
+
+    // Safe Area Inset Margin Utilities
+    $safeAreaDeviceSuffix: if($deviceSuffix != '', -#{$deviceSuffix}, '');
+
+    .margin-top-safe#{$safeAreaDeviceSuffix} {
+        margin-top: env(safe-area-inset-top);
+    }
+    .margin-bottom-safe#{$safeAreaDeviceSuffix} {
+        margin-bottom: env(safe-area-inset-bottom);
+    }
+
+    @each $key, $val in $layout-scales {
+        @if $key != 'auto' {
+            .margin-top-safe-#{$key}#{$safeAreaDeviceSuffix} {
+                margin-top: calc(env(safe-area-inset-top) + #{$val});
+            }
+            .margin-bottom-safe-#{$key}#{$safeAreaDeviceSuffix} {
+                margin-bottom: calc(env(safe-area-inset-bottom) + #{$val});
+            }
+        }
+    }
+}
+
+@mixin padding-utils($deviceSuffix: '', $suffix: '') {
+    @each $key, $val in $layout-scales {
+        $deviceKeySuffix: if($deviceSuffix != '', #{$key}-#{$deviceSuffix}, #{$key});
+        $classNameSuffix: if($suffix != '', -#{$suffix}, '');
+
+        .padding-#{$deviceKeySuffix} {
+            padding: $val;
+        }
+
+        .padding-horizontal-#{$deviceKeySuffix}#{$classNameSuffix} {
+            padding-left: $val !important;
+            padding-right: $val !important;
+        }
+
+        .padding-vertical-#{$deviceKeySuffix}#{$classNameSuffix} {
+            padding-top: $val;
+            padding-bottom: $val;
+        }
+
+        .padding-bottom-#{$deviceKeySuffix} {
+            padding-bottom: $val;
+        }
+
+        .padding-top-#{$deviceKeySuffix} {
+            padding-top: $val;
+        }
+
+        .padding-left-#{$deviceKeySuffix} {
+            padding-left: $val;
+        }
+
+        .padding-right-#{$deviceKeySuffix} {
+            padding-right: $val;
+        }
+    }
+
+    // Safe Area Inset Padding Utilities
+    $safeAreaDeviceSuffix: if($deviceSuffix != '', -#{$deviceSuffix}, '');
+
+    .padding-top-safe#{$safeAreaDeviceSuffix} {
+        padding-top: env(safe-area-inset-top);
+    }
+    .padding-bottom-safe#{$safeAreaDeviceSuffix} {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    @each $key, $val in $layout-scales {
+        @if $key != 'auto' {
+            .padding-top-safe-#{$key}#{$safeAreaDeviceSuffix} {
+                padding-top: calc(env(safe-area-inset-top) + #{$val});
+            }
+            .padding-bottom-safe-#{$key}#{$safeAreaDeviceSuffix} {
+                padding-bottom: calc(env(safe-area-inset-bottom) + #{$val});
+            }
+        }
+    }
+}
+
+@mixin gap-utils($deviceSuffix: '', $suffix: '') {
+    @each $key, $val in $layout-scales {
+        $deviceKeySuffix: if($deviceSuffix != '', #{$key}-#{$deviceSuffix}, #{$key});
+
+        .gap-#{$deviceKeySuffix} {
+            // HAD TO ADD !IMPORTANT, SINCE BOOTSTRAP OVERRIDES THIS
+            gap: $val !important;
+        }
+
+        .row-gap-#{$deviceKeySuffix} {
+            row-gap: $val;
+        }
+
+        .col-gap-#{$deviceKeySuffix} {
+            column-gap: $val;
+        }
+    }
+}
+
+$border-radius-values: 0, 1, 2, 3, 4, 6, 8, 12, 16, 20, 24;
+
+@each $value in $border-radius-values {
+    .border-radius-#{$value} {
+        border-radius: #{$value}px;
+    }
+}

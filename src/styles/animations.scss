@@ -1,0 +1,66 @@
+@use 'colors' as *;
+@use 'screen-sizes' as *;
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes modalEnterDesk {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+@keyframes modalExitDesk {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
+}
+
+@keyframes backdropFadeIn {
+    from {
+        backdrop-filter: unset;
+        -webkit-backdrop-filter: unset;
+        background: transparent;
+    }
+    to {
+        background: $backdropColor;
+        backdrop-filter: $backdropFilter;
+        -webkit-backdrop-filter: $backdropFilter;
+    }
+}
+@keyframes backdropFadeOut {
+    from {
+        background: $backdropColor;
+        backdrop-filter: $backdropFilter;
+        -webkit-backdrop-filter: $backdropFilter;
+    }
+    to {
+        backdrop-filter: unset;
+        -webkit-backdrop-filter: unset;
+        background: transparent;
+    }
+}

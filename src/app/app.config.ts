@@ -5,7 +5,7 @@ import {
     isDevMode,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import { ROUTES } from './app.routes';
 import { provideServiceWorker } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
@@ -15,12 +15,12 @@ import {
     getFirestore,
     enableIndexedDbPersistence,
 } from '@angular/fire/firestore';
+import { provideHttpClient } from '@angular/common/http';
 
 export const appConfig: ApplicationConfig = {
     providers: [
         provideBrowserGlobalErrorListeners(),
         provideZoneChangeDetection({ eventCoalescing: true }),
-        provideRouter(routes),
         provideServiceWorker('ngsw-worker.js', {
             enabled: !isDevMode(),
             registrationStrategy: 'registerWhenStable:30000',
@@ -33,5 +33,7 @@ export const appConfig: ApplicationConfig = {
             enableIndexedDbPersistence(fs).catch(() => {});
             return fs;
         }),
+        provideRouter(ROUTES),
+        provideHttpClient(),
     ],
 };

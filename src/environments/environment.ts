@@ -1,11 +1,12 @@
 export const environment = {
     production: false,
     firebase: {
-        apiKey: 'FIREBASE_API_KEY',
-        authDomain: 'PROJECT_ID.firebaseapp.com',
-        projectId: 'PROJECT_ID',
-        storageBucket: 'PROJECT_ID.appspot.com',
-        messagingSenderId: 'SENDER_ID',
-        appId: 'APP_ID',
+        apiKey: 'AIzaSyB0WPtwhy55fwZr77YEpq2Su7MDBxZJrYg',
+        authDomain: 'stoxfolio-e231a.firebaseapp.com',
+        projectId: 'stoxfolio-e231a',
+        storageBucket: 'stoxfolio-e231a.firebasestorage.app',
+        messagingSenderId: '658191040566',
+        appId: '1:658191040566:web:11948805a1a0ee817f5897',
+        measurementId: 'G-LFDLMX8LH1',
     },
 };

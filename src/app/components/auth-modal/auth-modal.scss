@@ -1,0 +1,43 @@
+@use '../../../styles/screen-sizes' as *;
+
+.google-sign-in {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 16px;
+    left: 16px; right: 16px;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    border: 1px solid #dadce0;
+    background-color: #fff;
+    color: #3c4043;
+    font-weight: 500;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 1px 2px rgba(60, 64, 67, 0.3), 0 1px 3px rgba(60, 64, 67, 0.15);
+    img {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+    }
+    &:hover {
+        background-color: #f7f7f7;
+    }
+    &:active {
+        background-color: #eee;
+    }
+    &:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(66, 133, 244, 0.4);
+    }
+}
+
+@media #{$tab} {
+    .modal {
+        width: 400px;
+        max-width: 100%;
+        height: 300px;
+    }
+}

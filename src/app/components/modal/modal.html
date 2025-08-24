@@ -1,0 +1,13 @@
+@if (state !== State.CLOSE) {
+<div
+    class="modal-backdrop"
+    [ngClass]="{'closing': state === State.CLOSING}"
+    (click)="close()"
+></div>
+<div class="modal-content" [ngClass]="{'closing': state === State.CLOSING}">
+    <div class="cross-btn">
+        <div class="cross-icon" (click)="close()"></div>
+    </div>
+    <ng-content />
+</div>
+}

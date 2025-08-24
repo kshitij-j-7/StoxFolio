@@ -1,1 +1,323 @@
-/* You can add global styles to this file, and also import other style files */
+@use 'styles/fonts' as *;
+@use 'styles/mixins' as *;
+@use 'styles/screen-sizes' as *;
+@use 'styles/icons' as *;
+@use 'styles/themes' as *;
+
+:root {
+    --app-font: 'Century Gothic', 'CenturyGothic', 'URW Gothic L', 'Arial', 'Helvetica', sans-serif;
+}
+
+* {
+    font-family: 'Urbanist', 'Raleway', 'Montserrat', 'Poppins', sans-serif;
+    font-size: 14px;
+}
+
+html,
+body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    padding: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding: 0;
+    margin: 0;
+}
+// Themes
+@include theme-utils(); 
+
+font {
+    &-italic {
+        font-style: italic;
+    }
+    &-thin {
+        font-weight: 100;
+    }
+    &-normal {
+        font-weight: 400;
+    }
+    &-bold {
+        font-weight: 500;
+    }
+    &-bolder {
+        font-weight: 600;
+    }
+}
+
+@include font-utils();
+@include line-height-utils();
+
+@include margin-utils();
+@include margin-utils('', 'neg');
+@include padding-utils();
+@include gap-utils();
+
+.text-transform {
+    &-capitalize {
+        text-transform: capitalize;
+    }
+    &-uppercase {
+        text-transform: uppercase;
+    }
+    &-lowercase {
+        text-transform: lowercase;
+    }
+}
+
+.text-align {
+    &-center {
+        text-align: center;
+    }
+    &-left {
+        text-align: left;
+    }
+    &-right {
+        text-align: right;
+    }
+}
+
+.show-mob,
+.show-mob-tab,
+.d-block {
+    display: block;
+}
+.show-mob-flx,
+.show-mob-tab-flx {
+    display: flex;
+}
+.show-mob-tab-inline {
+    display: inline-block;
+}
+.show-desk,
+.show-desk-flx,
+.show-tab-desk-flx,
+.show-desk-inline,
+.hide {
+    display: none;
+}
+.text-ellipsis {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.overflow-y-mob {
+    overflow-y: scroll;
+}
+.overflow-hidden {
+    overflow: hidden;
+}
+.overflow-scroll {
+    overflow: scroll;
+}
+
+.d-flx-inline {
+    display: inline-flex;
+}
+.d-flx {
+    display: flex;
+}
+.flx-d-row,
+.flx-d-row-clm {
+    flex-direction: row;
+}
+.flx-d-clm,
+.flx-d-clm-row {
+    flex-direction: column;
+}
+
+.flx-d-clm-reverse {
+    flex-direction: column-reverse;
+}
+
+.flx-d-row-reverse {
+    flex-direction: row-reverse;
+}
+
+.flx-1 {
+    flex: 1;
+}
+.flx-2 {
+    flex: 2;
+}
+.flx-3 {
+    flex: 3;
+}
+.flx-4 {
+    flex: 4;
+}
+.flx-5 {
+    flex: 5;
+}
+.flx-6 {
+    flex: 6;
+}
+.flx-7 {
+    flex: 7;
+}
+.flx-8 {
+    flex: 8;
+}
+.flx-shrink-0 {
+    flex-shrink: 0;
+}
+.flx-grow-1 {
+    flex-grow: 1;
+}
+.flx-wrp {
+    flex-wrap: wrap;
+}
+.a-items-start {
+    align-items: flex-start;
+}
+.a-items-c {
+    align-items: center;
+}
+.a-items-e {
+    align-items: flex-end;
+}
+.a-items-b {
+    align-items: baseline;
+}
+.a-items-s {
+    align-items: stretch;
+}
+.a-self-s {
+    align-self: stretch;
+}
+.a-self-c {
+    align-self: center;
+}
+.a-self-e {
+    align-self: flex-end;
+}
+.a-self-start {
+    align-self: flex-start;
+}
+.j-cont-start {
+    justify-content: start;
+}
+.j-cont-c {
+    justify-content: center;
+}
+.j-cont-e {
+    justify-content: flex-end;
+}
+.j-cont-space-bet {
+    justify-content: space-between;
+}
+.j-cont-space-anound {
+    justify-content: space-around;
+}
+.d-grid {
+    display: grid;
+}
+.d-inline {
+    display: inline;
+}
+.d-inline-block {
+    display: inline-block;
+}
+
+.height-100 {
+    height: 100%;
+}
+.height-auto {
+    height: auto !important;
+}
+
+.width-100 {
+    width: 100%;
+}
+.width-0 {
+    width: 0;
+}
+.max-width-100 {
+    max-width: 100%;
+}
+.height-0 {
+    height: 0;
+}
+.height-100vh {
+    height: 100vh;
+}
+.width-100vw {
+    width: 100vw;
+}
+.min-width-0 {
+    min-width: 0;
+}
+.width-fit-content {
+    width: fit-content !important;
+}
+.width-max-content {
+    width: max-content;
+}
+
+.image-cover {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    font-size: 0;
+}
+.image-contain {
+    height: 100%;
+    width: 100%;
+    object-fit: contain;
+    font-size: 0;
+}
+
+@media #{$mob} {
+    @include font-utils('mob');
+    @include line-height-utils('mob');
+    @include margin-utils('mob');
+    @include margin-utils('mob', 'neg');
+    @include padding-utils('mob');
+    @include gap-utils('mob');
+
+    .a-items-c-mob {
+        align-items: center;
+    }
+    .width-100-mob {
+        width: 100% !important;
+    }
+    .height-100-mob {
+        height: 100%;
+    }
+}
+
+@media #{$desk} {
+    @include font-utils('desk');
+    @include line-height-utils('desk');
+    @include margin-utils('desk');
+    @include margin-utils('desk', 'neg');
+    @include padding-utils('desk');
+    @include gap-utils('desk');
+
+    .show-mob,
+    .show-mob-tab,
+    .show-mob-flx {
+        display: none;
+    }
+    .show-desk {
+        display: block;
+    }
+    .show-desk-inline {
+        display: inline-block;
+    }
+    .show-desk-flx,
+    .show-desk-flx {
+        display: flex;
+    }
+    .flx-d-row-clm {
+        flex-direction: column;
+    }
+}

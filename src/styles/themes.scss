@@ -1,0 +1,30 @@
+@use 'colors' as *;
+
+$themes: (
+    light: (
+        text-color: $dark-2,
+        bg-color: $light-2,
+        bg-color-1: $light-3,
+        bg-color-2: $light-4,
+        bg-color-3: $light-5,
+        bg-color-4: $light-6,
+    ),
+    dark: (
+        text-color: $light-1,
+        bg-color: $dark-1,
+        bg-color-1: $dark-2,
+        bg-color-2: $dark-3,
+        bg-color-3: $dark-4,
+        bg-color-4: $dark-5,
+    ),
+);
+
+@mixin theme-utils() {
+    @each $name, $theme in $themes {
+        .#{$name}-mode {
+            @each $prop, $value in $theme {
+                --#{$prop}: #{$value};
+            }
+        }
+    }
+}
