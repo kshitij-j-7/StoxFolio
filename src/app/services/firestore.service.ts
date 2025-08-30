@@ -1,20 +1,10 @@
 import { inject, Injectable } from '@angular/core';
-import {
-    Firestore,
-    collection,
-    addDoc,
-    collectionData,
-    DocumentReference,
-    CollectionReference,
-    doc,
-    docData,
-    setDoc,
-    serverTimestamp,
-} from '@angular/fire/firestore';
+import { Firestore, collection, collectionData, doc, docData, setDoc } from '@angular/fire/firestore';
 import { ITransaction, TransactionType } from '../models/transaction.model';
 import { combineLatest, map, Observable } from 'rxjs';
 import { IProfile } from '../models/profile.model';
 import { IProfileDto } from '../dto/profile.dto';
+import { ITransactionDataDto } from '../dto/transaction-dto';
 
 @Injectable({ providedIn: 'root' })
 export class FirestoreService {
@@ -22,9 +12,7 @@ export class FirestoreService {
 
     getUserData(uid: string): Observable<IProfile | null> {
         const docRef = doc(this.firestore, `users/${uid}`);
-        return (docData(docRef, { idField: 'id' }) as Observable<IProfileDto | undefined>).pipe(
-            map((doc) => doc?.profile ?? null)
-        );
+        return (docData(docRef, { idField: 'id' }) as Observable<IProfileDto | undefined>).pipe(map((doc) => doc?.profile ?? null));
     }
 
     addOrUpdateUserData(data: IProfile): Promise<void> {
@@ -37,7 +25,7 @@ export class FirestoreService {
 
     addTransactionByUser(uid: string, transaction: ITransaction): Promise<void> {
         const { type, ...payload } = transaction;
-        const userTransactionDoc = doc(this.firestore, `users/${uid}/${type}/${Date.now()}`);
+        const userTransactionDoc = doc(this.firestore, `users/${uid}/${type}/${(Date.now())}`);
         return setDoc(userTransactionDoc, payload);
     }
 
@@ -46,15 +34,12 @@ export class FirestoreService {
         return collectionData(docRef) as Observable<ITransaction[]>;
     }
 
-    getAllTransactions(uid: string): Observable<ITransaction[]> {
-        return combineLatest([
-            this.getTransactionsOfType(uid, TransactionType.PURCHASE),
-            this.getTransactionsOfType(uid, TransactionType.REDEEM),
-        ]).pipe(
-            map(([purchases, redeems]) => {
-                const merged = [...(purchases || []), ...(redeems || [])];
-                return merged.sort((a, b) => b.date - a.date);
-            })
+    getAllTransactions(uid: string): Observable<ITransactionDataDto> {
+        return combineLatest([this.getTransactionsOfType(uid, TransactionType.PURCHASE), this.getTransactionsOfType(uid, TransactionType.REDEEM)]).pipe(
+            map(([purchases, redeems]) => ({
+                [TransactionType.PURCHASE]: purchases?.sort((a, b) => b.date - a.date),
+                [TransactionType.REDEEM]: redeems?.sort((a, b) => b.date - a.date),
+            }))
         );
     }
 }

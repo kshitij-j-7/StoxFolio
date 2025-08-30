@@ -1,5 +1,5 @@
 import { NgClass } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { IModalConfig } from './modal.interface';
 
 enum State {
@@ -21,7 +21,10 @@ export class Modal {
 
     State = State;
     state = State.CLOSE;
-    @Input() set config(config: IModalConfig) {
+
+    modalConfig = signal<IModalConfig | null>(null);
+    @Input('config') set _setConfig(config: IModalConfig) {
+        this.modalConfig.set(config);
         if (config?.isOpen) {
             this.state = State.OPENING;
             setTimeout(() => {
@@ -31,15 +34,15 @@ export class Modal {
             this.close(true);
         }
     }
-    @Output() onClose = new EventEmitter<boolean>();
+    @Output() onClose = new EventEmitter();
 
     close(isForced?: boolean) {
         if (!isForced) {
-            if (this.state !== State.OPEN || !this.config?.isClosable) return;
+            if (this.state !== State.OPEN || !this.modalConfig()?.isClosable) return;
         }
         this.state = State.CLOSING;
         setTimeout(() => {
-            this.onClose.emit(false);
+            this.onClose.emit();
             this.state = State.CLOSE;
         }, this.ANIMATION_DURATION);
     }

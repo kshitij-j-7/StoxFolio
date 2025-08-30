@@ -1,4 +1,9 @@
 <div class="padding-32 font-48">
-    {{ user()?.name || '' }}
-    <app-auth-modal></app-auth-modal>
+    <div>{{ user()?.name ? `Welcome ${user()!.name}!` : '' }}</div>
+
+    <app-price-chart></app-price-chart>
+    @if (showAuthModal()) {
+    <app-auth-modal (onClose)="toggleAuthModal(false)"></app-auth-modal>
+    }
+    <app-investment-table></app-investment-table>
 </div>

@@ -1,3 +1,5 @@
+import { ITransactionDto } from '../dto/transaction-dto';
+
 export interface ITransaction extends ITransactionDto {
     schemeCode: number;
     type: TransactionType;

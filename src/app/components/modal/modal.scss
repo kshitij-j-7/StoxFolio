@@ -12,9 +12,9 @@ $modalDuration: 0.4s;
     height: 100%;
     z-index: 999;
 
-    animation: fadeIn $modalDuration ease-out forwards;
+    animation: backdropFadeIn $modalDuration ease-out forwards;
     &.closing {
-        animation: fadeOut $modalDuration ease-out forwards;
+        animation: backdropFadeOut $modalDuration ease-out forwards;
     }
 }
 
@@ -52,6 +52,7 @@ $modalDuration: 0.4s;
         transform: translate(-50%, -50%);
         width: unset;
         height: unset;
+        border-radius: 4px;
 
         animation: modalEnterDesk $modalDuration ease-out forwards;
         &.closing {
